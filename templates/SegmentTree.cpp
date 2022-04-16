@@ -10,7 +10,7 @@ struct segt {
     int n, neutral;
     vector<T> tr, lz;
     vector<bool>  clz;
-    segt (T n, T neutral): n(n), neutral(neutral) {
+    segt (int n, T neutral): n(n), neutral(neutral) {
         tr.assign (4 * n + 5, neutral);
         lz.assign (4 * n + 5, 0);
         clz.assign (4 * n + 5, 0);
