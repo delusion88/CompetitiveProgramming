@@ -5,7 +5,9 @@ using namespace std;
 const long long inf = 1100000000000000000;
 const int Inf = 0x4f4f4f4f;
 
-template <typename T>
+template <
+    typename T
+>
 struct segt {
     int n;
     T neutral;
