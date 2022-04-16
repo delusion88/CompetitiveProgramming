@@ -7,7 +7,8 @@ const int Inf = 0x4f4f4f4f;
 
 template <typename T>
 struct segt {
-    int n, neutral;
+    int n;
+    T neutral;
     vector<T> tr, lz;
     vector<bool>  clz;
     segt (int n, T neutral): n(n), neutral(neutral) {
