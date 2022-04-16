@@ -1,7 +1,5 @@
 # CompetitiveProgramming
 
----
-
 This repository is a collection of nice things for competitive programming.
 
 It contains:
