@@ -8,12 +8,12 @@ const int Inf = 0x4f4f4f4f;
 template <
     typename T
 >
-struct segt {
+struct SegmentTree {
     int n;
     T neutral;
     vector<T> tr, lz;
     vector<bool>  clz;
-    segt (int n, T neutral): n(n), neutral(neutral) {
+    SegmentTree (int n, T neutral): n(n), neutral(neutral) {
         tr.assign (4 * n + 5, neutral);
         lz.assign (4 * n + 5, 0);
         clz.assign (4 * n + 5, 0);
