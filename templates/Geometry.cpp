@@ -7,128 +7,93 @@ const int Inf = 0x4f4f4f4f;
 const long double eps = 0.000000001;
 const long double pi = acos (-1);
 
-struct Point {
-    long double x, y;
-    Point ( ): x(0), y(0) { }
-    Point (long double x, long double y): x(x), y(y) { }
-    friend Point operator+ (const Point lhs, const Point rhs) {
-        return Point (lhs.x + rhs.x, lhs.y + rhs.y);
-    }
-    Point operator+= (const Point rhs) {
-        return *this = *this + rhs;
-    }
-    friend Point operator- (const Point lhs, const Point rhs) {
-        return Point (lhs.x - rhs.x, lhs.y - rhs.y);
-    }
-    Point operator-= (const Point rhs) {
-        return *this = *this - rhs;
-    }
-    friend Point operator* (const Point lhs, const long double rhs) {
-        return Point (lhs.x * rhs, lhs.y * rhs);
-    }
-    Point operator*= (const long double rhs) {
-        return *this = *this * rhs;
-    }
-    friend Point operator/ (const Point lhs, const long double rhs) {
-        return Point (lhs.x / rhs, lhs.y / rhs);
-    }
-    Point operator/= (const long double rhs) {
-        return *this = *this / rhs;
-    }
-    friend bool operator== (const Point lhs, const Point rhs) {
-        return abs(lhs.x - rhs.x) <= eps && abs(lhs.y - rhs.y) <= eps;
-    }
-    friend bool operator!= (const Point lhs, const Point rhs) {
-        return !(lhs == rhs);
-    }
-    friend ostream& operator<< (ostream& out, const Point rhs) {
-        out << rhs.x << ' ' << rhs.y;
-        return out;
-    }
-    friend istream& operator>> (istream& in, Point &rhs) {
-        in >> rhs.x >> rhs.y;
-        return in;
-    }
-};
 struct Vector {
-    Point a;
-    Vector ( ) { }
-    Vector (Point a): a(a) { }
-    Vector (long double x, long double y): a(Point(x, y)) { }
+    long double x, y;
+    Vector ( ): x(0), y(0) { }
+    Vector (long double x, long double y): x(x), y(y) { }
     friend Vector operator+ (const Vector lhs, const Vector rhs) {
-        return Vector (lhs.a + rhs.a);
+        return Vector (lhs.x + rhs.x, lhs.y + rhs.y);
     }
     Vector operator+= (const Vector rhs) {
         return *this = *this + rhs;
     }
     friend Vector operator- (const Vector lhs, const Vector rhs) {
-        return Vector (lhs.a - rhs.a);
+        return Vector (lhs.x - rhs.x, lhs.y - rhs.y);
     }
     Vector operator-= (const Vector rhs) {
         return *this = *this - rhs;
     }
     friend Vector operator* (const Vector lhs, const long double rhs) {
-        return Vector (lhs.a * rhs);
+        return Vector (lhs.x * rhs, lhs.y * rhs);
     }
     Vector operator*= (const long double rhs) {
         return *this = *this * rhs;
     }
     friend Vector operator/ (const Vector lhs, const long double rhs) {
-        return Vector (lhs.a / rhs);
+        return Vector (lhs.x / rhs, lhs.y / rhs);
     }
     Vector operator/= (const long double rhs) {
         return *this = *this / rhs;
     }
     friend long double operator* (const Vector lhs, const Vector rhs) {
-        return lhs.a.x * rhs.a.x + lhs.a.y * rhs.a.y;
+        return lhs.x * rhs.x + lhs.y * rhs.y;
     }
     friend long double operator% (const Vector lhs, const Vector rhs) {
-        return lhs.a.x * rhs.a.y - lhs.a.y * rhs.a.x;
+        return lhs.x * rhs.y - lhs.y * rhs.x;
+    }
+    long double angle () const {
+        return (atan2 (y, x) < 0 ? atan2 (y, x) + pi * 2 : atan2 (y, x));
+    }
+    long double length () const {
+        return hypotl (x, y);
     }
     friend Vector operator/ (const Vector lhs, const Vector rhs) {
-        return Vector (lhs.a.x / rhs.a.x, lhs.a.y / rhs.a.y);
+        return Vector (lhs.x / rhs.x, lhs.y / rhs.y);
     }
     Vector operator/= (const Vector rhs) {
         return *this = *this / rhs;
     }
     friend bool operator== (const Vector lhs, const Vector rhs) {
-        return lhs.a == rhs.a;
+        return abs(lhs.x - rhs.x) <= eps && abs(lhs.y - rhs.y) <= eps;
     }
     friend bool operator!= (const Vector lhs, const Vector rhs) {
-        return lhs.a != rhs.a;
-    }
-    long double angle () const {
-        return (atan2 (a.y, a.x) < 0 ? atan2 (a.y, a.x) + pi * 2 : atan2 (a.y, a.x));
-    }
-    long double length () const {
-        return hypotl (a.x, a.y);
+        return !(lhs == rhs);
     }
     friend ostream& operator<< (ostream& out, const Vector rhs) {
-        out << rhs.a;
+        out << rhs.x << ' ' << rhs.y;
         return out;
     }
     friend istream& operator>> (istream& in, Vector &rhs) {
-        in >> rhs.a;
+        in >> rhs.x >> rhs.y;
         return in;
     }
 };
 
 struct Polygon {
-    vector <Point> p;
+    vector <Vector> p;
     Polygon ( ) { }
-    Polygon (vector<Point> p): p(p) { }
+    Polygon (vector<Vector> p): p(p) { }
     size_t size () const {
         return p.size();
     }
-    Point& operator[] (size_t x) {
+    Vector& operator[] (size_t x) {
         return p[x];
+    }
+    Vector back () const {
+        return p.back ();
+    }
+    void pop_back () {
+        p.pop_back ();
+    }
+    void push_back (Vector v) {
+        p.push_back (v);
     }
     long double area () {
         long double res = 0;
         size_t sz = size();
         for (size_t i = 0; i < sz; ++i) {
-            Point& x = p[i];
-            Point& y = (i ? p[i - 1] : p.back());
+            Vector& x = p[i];
+            Vector& y = (i ? p[i - 1] : p.back());
             res += (x.x - y.x) * (x.y + y.y);
         }
         return abs(res) / 2;
@@ -137,6 +102,30 @@ struct Polygon {
 
 long double angle (Vector a, Vector b) {
     return abs(atan2 (a % b, a * b));
+}
+
+Polygon ConvexHull (vector<Vector> p) {
+    Vector s = p[0];
+    for (auto v : p) {
+        if (v.y < s.y || (v.y == s.y && v.x < s.x))
+            s = v;
+    }
+    sort (p.begin (), p.end (), [&] (Vector a, Vector b) {
+        return ((Vector (a) - s) % (Vector (b) - s)) > 0;
+    });
+    Polygon hull;
+    for (auto v : p) {
+        while (hull.size () >= 2) {
+            Vector vec = v - hull.back ();
+            Vector vec1 = hull.back () - hull[hull.size () - 2];
+            if (vec % vec1 > 0)
+                hull.pop_back ();
+            else
+                break;
+        }
+        hull.push_back (v);
+    }
+    return hull;
 }
 
 void solve () {
