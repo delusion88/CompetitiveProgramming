@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir stress
 i=1
 g++ -std=c++17 gen.cpp -o ./stress/generator
 g++ -std=c++17 source.cpp -o ./stress/orig
@@ -39,7 +40,4 @@ then
 else
     echo -e "${GREEN}Ok ${max_tests} of ${max_tests} test cases.${NC}"
 fi
-rm -rf ./stress/original_output
-rm -rf ./stress/brute_output
-rm -rf ./stress/input1
-rm -rf ./stress/dont_show_on_terminal
+rm -rf ./stress
