@@ -5,7 +5,7 @@ using namespace std;
 const long long inf = 1100000000000000000;
 const int Inf = 0x4f4f4f4f;
 
-void solve () {
+void solve_case () {
     
 }
  
@@ -15,6 +15,6 @@ signed main () {
     long long Tc = 1;
     // cin >> Tc;
     for (long long testCase = 1; testCase <= Tc; ++testCase, cout << '\n') {
-        solve();
+        solve_case();
     }
 }
