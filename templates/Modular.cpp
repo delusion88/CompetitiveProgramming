@@ -13,7 +13,7 @@ struct Modular {
             x %= mod;
             x += mod;
         }
-        if (x > mod) {
+        if (x >= mod) {
             x %= mod;
         }
         val = x;
