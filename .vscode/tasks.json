@@ -8,7 +8,6 @@
                 "-std=c++17",
                 "-O3",
                 "-DLOCAL",
-                "-D_GLIBCXX_DEBUG",
                 "-Wshadow",
                 "-Wfloat-equal",
                 "-g",
