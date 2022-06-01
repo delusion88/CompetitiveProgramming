@@ -15,10 +15,10 @@ struct SparseTable {
         return max (a, b);
     }
     SparseTable () { }
-    SparseTable (size_t size): size (size), k (64 - __builtin_clzll(size - 1)) {
+    SparseTable (size_t size): size (size), k (__lg (size) + 1) {
         sparse.assign (k, vector<T> (size));
     } 
-    SparseTable (vector<T> v): size (v.size()), k (64 - __builtin_clzll(v.size() - 1)) {
+    SparseTable (vector<T> v): size (v.size()), k (__lg (size) + 1) {
         sparse.assign (k, vector<T> (size, 0));  
         sparse[0] = v;  
         for (int l = 1; l < k; ++l)
