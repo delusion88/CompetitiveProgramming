@@ -24,14 +24,14 @@ struct Modular {
         return (lhs.val + rhs.val >= mod) ? lhs.val + rhs.val - mod : lhs.val + rhs.val;
     }
 
-    Modular operator+= (const Modular rhs) {
+    Modular& operator+= (const Modular rhs) {
         return *this = *this + rhs;
     }
     friend Modular operator- (const Modular lhs, const Modular rhs) {
         return (lhs.val - rhs.val < 0) ? lhs.val - rhs.val + mod : lhs.val - rhs.val;
     }
 
-    Modular operator-= (const Modular rhs) {
+    Modular& operator-= (const Modular rhs) {
         return *this = *this - rhs;
     }
     friend Modular operator- (const Modular rhs) {
@@ -41,7 +41,7 @@ struct Modular {
     friend Modular operator* (const Modular lhs, const Modular rhs) {
         return (lhs.val * rhs.val) % mod;
     }
-    Modular operator*= (const Modular rhs) {
+    Modular& operator*= (const Modular rhs) {
         return *this = *this * rhs;
     }
 
@@ -74,7 +74,7 @@ struct Modular {
         }
         return res;
     }
-    Modular operator^= (const Modular rhs) {
+    Modular& operator^= (const Modular rhs) {
         return *this = (*this ^ rhs);
     }
 
@@ -85,7 +85,7 @@ struct Modular {
     friend Modular operator/ (const Modular lhs, const Modular rhs) {
         return lhs * (*rhs);
     }
-    Modular operator/= (const Modular rhs) {
+    Modular& operator/= (const Modular rhs) {
         return *this = *this / rhs;
     }
 
