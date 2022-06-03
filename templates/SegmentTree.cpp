@@ -67,6 +67,7 @@ struct SegmentTree {
         if (l >= ql && r <= qr) {
             clz[node] = 1;
             lz[node] = val;
+            push (node, l, r);
             return;
         }
         if (l > qr || r < ql) {
