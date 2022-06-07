@@ -42,17 +42,3 @@ struct Fenwick {
         return get (r) - get(l - 1);
     }
 };
-
-void solve () {
-    
-}
- 
-signed main () {
-    cin.tie(0);
-    ios_base::sync_with_stdio(0);
-    long long Tc = 1;
-    // cin >> Tc;
-    for (long long testCase = 1; testCase <= Tc; ++testCase, cout << '\n') {
-        solve();
-    }
-}
