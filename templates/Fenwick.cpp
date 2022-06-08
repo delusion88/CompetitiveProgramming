@@ -1,23 +1,3 @@
-#include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-
-using namespace std;
-
-using ordered_set = 
-      __gnu_pbds::tree <
-          long long,
-          __gnu_pbds::null_type,
-          less <
-          long long >,
-          __gnu_pbds::rb_tree_tag,
-          __gnu_pbds::tree_order_statistics_node_update >;
-
-std::mt19937_64 rnd64 (
-    std::chrono::high_resolution_clock::now ().time_since_epoch ().count () );
-
-const long long inf = 1100000000000000000;
-const int Inf = 0x4f4f4f4f;
-
 template <
     typename T
 >
@@ -40,5 +20,54 @@ struct Fenwick {
     }
     T get (long long l, long long r) {
         return get (r) - get(l - 1);
+    }
+};
+
+template <
+    typename T
+>
+struct Gigachad {
+    vector <T> tr;
+    Gigachad () { }
+    Gigachad (size_t size) {
+        tr.assign(size + 2, 0);
+    }
+    void update (int idx, T delta) {
+        for (++idx; idx < tr.size(); idx += idx & -idx)
+            tr[idx] += delta;
+    }
+    void update (int l, int r, T delta) {
+        update(l, delta);
+        update(r + 1, -delta);
+    }
+    T get (long long r) {
+        if (r <= 0)
+            return 0;
+        T res = 0;
+        for (++r; r > 0; r -= r & -r)
+            res += tr[r];
+        return res;
+    }
+};
+
+template <
+    typename T
+>
+struct HyperGigaChad {
+    Gigachad<T> G1, G2;
+    HyperGigaChad (size_t size) {
+        G1 = Gigachad<T>(size);
+        G2 = Gigachad<T>(size);
+    }
+    void update (int l, int r, int delta) {
+        G1.update(l, r, delta);
+        G2.update(l, delta * (l - 1));
+        G2.update(r + 1, -delta * r);
+    }
+    T get (int r) {
+        return G1.get(r) * r - G2.get(r);
+    }
+    T get (int l, int r) {
+        return get(r) - get(l - 1);
     }
 };
