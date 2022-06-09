@@ -26,10 +26,10 @@ struct Fenwick {
 template <
     typename T
 >
-struct Gigachad {
+struct FenwickRange {
     vector <T> tr;
-    Gigachad () { }
-    Gigachad (size_t size) {
+    FenwickRange () { }
+    FenwickRange (size_t size) {
         tr.assign(size + 2, 0);
     }
     void update (int idx, T delta) {
@@ -53,11 +53,11 @@ struct Gigachad {
 template <
     typename T
 >
-struct HyperGigaChad {
-    Gigachad<T> G1, G2;
-    HyperGigaChad (size_t size) {
-        G1 = Gigachad<T>(size);
-        G2 = Gigachad<T>(size);
+struct FenwickRanges {
+    FenwickRange<T> G1, G2;
+    FenwickRanges (size_t size) {
+        G1 = FenwickRange<T>(size);
+        G2 = FenwickRange<T>(size);
     }
     void update (int l, int r, int delta) {
         G1.update(l, r, delta);

@@ -118,9 +118,6 @@ struct SegmentTree {
     T get (int l, int r) {
         return _get (0, 0, n - 1, l, r);
     }
-    void update (int l, int r, T val) {
-        _upd (0, 0, n - 1, l, r, val);
-    }
     void update (int idx, T val) {
         _upd (0, 0, n - 1, idx, idx, val);
     }
