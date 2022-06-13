@@ -86,7 +86,10 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "variant": "cpp",
-        "hash_map": "cpp"
+        "hash_map": "cpp",
+        "expected": "cpp",
+        "spanstream": "cpp",
+        "stacktrace": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }
