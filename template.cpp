@@ -10,6 +10,6 @@ signed main () {
     ios_base::sync_with_stdio(0);
     long long Tc = 1;
     // cin >> Tc;
-    while(Tc-- && cout << '\n')
-        solve();
+    while(Tc--)
+        solve(), cout << '\n';
 }
