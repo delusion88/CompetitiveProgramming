@@ -1,3 +1,7 @@
+template <
+    int modA = 1000000009,
+    int modB = 1000000123
+>
 struct StringComparator {
     struct HashInt {
         long long a, b;
@@ -34,7 +38,28 @@ struct StringComparator {
         for (int i = 0; i <= s.size(); ++i)
             pows.push_back(pows.back() * p);
     }
+    /**
+     * @brief IMPORTANT! Second arg is length 
+     */
     HashInt substr (int idx, int len) const {
         return h[idx + len] - h[idx] * pows[len];
+    }
+    int lcp (int i, int j) {
+        int l = 0, r = s.size() - max(i, j);
+        while (r - l > 0) {
+            int m = (l + r + 1) / 2;
+            if (substr(i, m) == substr(j, m))
+                l = m;
+            else
+                r = m - 1;
+        }
+        return l;
+    }
+    int cmp (int a, int b) {
+        int len = s.size() - max(a, b), l = lcp(a, b);
+        return l < len ? (int)s[a + l] - s[b + l] : b - a;
+    }
+    bool operator() (int i, int j) { 
+        return cmp(i, j) < 0; 
     }
 };
