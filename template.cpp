@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int Inf       = 0x4f4f4f4f;
-const long long inf = 1100000000000000000;
+const long long inf = 1144000000000000000;
 void solve () {
     
 }
