@@ -7,6 +7,7 @@ struct Modular {
         if (x < 0) {
             x %= mod;
             x += mod;
+            x %= mod;
         }
         if (x >= mod) {
             x %= mod;
