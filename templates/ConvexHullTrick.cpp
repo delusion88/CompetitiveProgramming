@@ -24,8 +24,7 @@ struct ConvexHull {
         }
         if (x->k == y->k) {
             x->p = x->b > y->b ? inf : -inf;
-        }
-        else {
+        } else {
             x->p = div(y->b - x->b, x->k - y->k);
         }
         return x->p >= y->p;
