@@ -2,9 +2,12 @@ inline int bit(int x, unsigned b) {
   return (x >> b) & 1;
 }
  
-template <
-  int maxBit = 30
->
+/**
+ * @date 2022-06-?
+ * @author Delusion88
+ * @brief xor-trie
+ */
+template <int maxBit = 30>
 struct Trie {
   struct node {
     int count = 0, subt = 0;

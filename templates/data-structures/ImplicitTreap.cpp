@@ -1,4 +1,10 @@
-struct Node {
+/**
+ * @date 2022-06-?
+ * @author Delusion88
+ * @brief Treap
+ */
+class Node {
+ public:
   int sz, y, val, chg, push;
   Node* l = 0;
   Node* r = 0;
@@ -14,7 +20,12 @@ int sz(Node* t) {
 void upd(Node* t) {
   t->sz = sz(t->l) + sz(t->r) + 1;
 }
- 
+
+Node* set_push(Node* t, int push) {
+  if(t) t->push += push;
+  return t;
+}
+
 void push(Node* t) {
   if(t->l)
     t->l->push += t->push;
@@ -68,6 +79,6 @@ Node* cut(int l, int r) {
  
 void ins(Node* t, int x) {
   auto [l, r] = split(root, x);
-  t->push++;
+  t = set_push(t, 1);
   root = merge(l, merge(t, r));
 }

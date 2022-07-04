@@ -1,28 +1,10 @@
-template <
-  typename T
->
-struct Fenwick {
-  vector <T> tr;
-  Fenwick(size_t size) {
-    tr.assign(size, 0);
-  }
-  void update(size_t idx, T delta) {
-    for(; idx < tr.size(); idx |= idx + 1)
-      tr[idx] += delta;
-  }
-  T get(long long r) {
-    if(r < 0)
-      return 0;
-    T res = 0;
-    for(++r; r > 0; r &= r - 1)
-      res += tr[r - 1];
-    return res;
-  }
-  T get(long long l, long long r) {
-    return get(r) - get(l - 1);
-  }
-};
-
+/**
+ * @date 2022-06-?
+ * @author Delusion88
+ * @brief 1-INDEXED! Fenwick tree. get(idx) -> val on index idx. update(l, r, delta) -> add on [l; r]. 
+ * 
+ * @tparam T Type of elements
+ */
 template <
   typename T
 >
@@ -50,6 +32,13 @@ struct FenwickRange {
   }
 };
 
+/**
+ * @date 2022-06-?
+ * @author Delusion88
+ * @brief 1-INDEXED! Fenwick tree. get(l, r) -> sum on [l; r]. update(l, r, delta) -> add on [l; r]. 
+ * 
+ * @tparam T Type of elements
+ */
 template <
   typename T
 >

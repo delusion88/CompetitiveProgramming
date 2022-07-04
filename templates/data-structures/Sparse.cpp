@@ -7,14 +7,21 @@ struct SPMaxMerger {
   }
 };
 
-template <
-  typename T,
-  typename SPMerge = SPMaxMerger
->
-struct SparseTable {
+/**
+ * @date 2022-06-?
+ * @author Delusion88
+ * @brief Sparse table
+ * 
+ * @tparam T Type of elements
+ * @tparam SPMerge Merger
+ */
+template <typename T, typename SPMerge = SPMaxMerger>
+class SparseTable {
+ private:
   size_t size, k;
   vector<vector<T>> sparse;
   SPMerge merge;
+ public:
   SparseTable(): merge(SPMerge()) { }
   SparseTable(size_t size): merge(SPMerge()), size(size), k(__lg(size) + 1) {
     sparse.assign(k, vector<T>(size));

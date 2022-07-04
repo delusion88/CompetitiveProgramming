@@ -1,8 +1,13 @@
-template <
-  int modA = 1000000009,
-  int modB = 1000000123
->
-struct StringComparator {
+/**
+ * @date 2022-06-?
+ * @author Delusion88
+ * @brief String comparator
+ * 
+ * @tparam modA First mod
+ * @tparam modB Second mod
+ */
+class StringComparator {
+ private:
   struct HashInt {
     long long a, b;
     HashInt (): a(0), b(0) { }
@@ -30,6 +35,7 @@ struct StringComparator {
   long long p = 239;
   string s;
   vector<HashInt> h, pows;
+ public:
   StringComparator (string s): s(s) {
     h.assign(s.size() + 1, 0);
     for (int i = 0; i < s.size(); ++i)
