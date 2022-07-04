@@ -65,6 +65,11 @@ class Modular {
   friend Modular operator/(const T& lhs, const Modular& rhs) { return Modular(lhs) /= rhs; }
 
   template <typename T>
+  Modular& operator%=(const T& other) { (this->val %= other); return *this; }
+  template <typename T>
+  friend Modular operator%(const Modular& lhs, const T& rhs) { return Modular(lhs) %= rhs; }
+
+  template <typename T>
   static T inverse(const T& a_, const T& m_) {
     T a = a_, m = m_;
     T u = 0, v = 1;
@@ -133,4 +138,27 @@ Modular power(const Modular& x_, const T& p_) {
 
 string to_string(const Modular& x) {
   return to_string(x());
+}
+
+Modular sqrt(const Modular& a) {
+  if(a == 0) return 0;
+  assert(power(a, (mod - 1) / 2) == 1);
+  if(mod % 4 == 3) return power(a, (mod + 1) / 4);
+  long long s = mod - 1, n = 2;
+  long long r = 0, m;
+  while(s % 2 == 0)
+    ++r, s /= 2;
+  while(power(n, (mod - 1) / 2) != mod - 1) ++n;
+  Modular x = power(a, (s + 1) / 2);
+  Modular b = power(a, s), g = power(n, s);
+  for(;; r = m) {
+    Modular t = b;
+    for(m = 0; m < r && t != 1; ++m)
+      t = t * t % mod;
+    if(m == 0) return x;
+    Modular gs = power(g, 1LL << (r - m - 1));
+    g = gs * gs % mod;
+    x = x * gs % mod;
+    b = b * g % mod;
+  }
 }
