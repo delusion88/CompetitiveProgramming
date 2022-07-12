@@ -7,7 +7,6 @@
             "args": [
                 "-std=c++2a",
                 "-DLOCAL",
-                "-O2",
                 "-Wunused",
                 "-Wuninitialized",
                 "-Wshadow",
