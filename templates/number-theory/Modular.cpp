@@ -80,6 +80,7 @@ class Modular {
       u -= t * v; 
       swap(u, v);
     }
+    assert(m == 1);
     return u;
   }
 
@@ -126,6 +127,7 @@ class Modular {
 
 template <typename T>
 Modular power(const Modular& x_, const T& p_) {
+  assert(p_ >= 0);
   Modular x = x_, res = 1;
   T p = p_;
   while(p > 0) {
@@ -141,21 +143,25 @@ string to_string(const Modular& x) {
 }
 
 Modular sqrt(const Modular& a) {
-  if(a == 0) return 0;
+  if(a == 0) 
+    return 0;
   assert(power(a, (mod - 1) / 2) == 1);
-  if(mod % 4 == 3) return power(a, (mod + 1) / 4);
+  if(mod % 4 == 3) 
+    return power(a, (mod + 1) / 4);
   long long s = mod - 1, n = 2;
   long long r = 0, m;
   while(s % 2 == 0)
     ++r, s /= 2;
-  while(power(n, (mod - 1) / 2) != mod - 1) ++n;
+  while(power(n, (mod - 1) / 2) != mod - 1) 
+    ++n;
   Modular x = power(a, (s + 1) / 2);
   Modular b = power(a, s), g = power(n, s);
   for(;; r = m) {
     Modular t = b;
     for(m = 0; m < r && t != 1; ++m)
       t = t * t % mod;
-    if(m == 0) return x;
+    if(m == 0) 
+      return x;
     Modular gs = power(g, 1LL << (r - m - 1));
     g = gs * gs % mod;
     x = x * gs % mod;
