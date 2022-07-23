@@ -3,9 +3,8 @@
  * @author Delusion88
  * @brief Find articulation points in a graph
  */
-const int N = 300000;
-int d[N], up[N];
-set<int> ans;
+const int maxn = 300000;
+int d[maxn], up[maxn], ans[maxn];
 void dfs(int v, int p, int dep) {
   d[v] = up[v] = dep;
   int ch = 0;
@@ -15,7 +14,7 @@ void dfs(int v, int p, int dep) {
       dfs(e, v, dep + 1);
       up[v] = min(up[v], up[e]);
       if(d[v] <= up[e] && p != -1) {
-        ans.insert(v);
+        ans[v] = 1;
       }
       ch++;
     } else {
@@ -23,6 +22,6 @@ void dfs(int v, int p, int dep) {
     }
   }
   if(p == -1 && ch > 1) {
-    ans.insert(v);
+    ans[v] = 1;
   }
 }

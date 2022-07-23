@@ -5,8 +5,8 @@
  * 
  * @attention All edges in graph: g[from] {to; number}
  */
-const int N = 300000;
-int d[N], up[N];
+const int maxn = 300000;
+int d[maxn], up[maxn];
 vector<int> ans;
 void dfs(int v, int p, int dep) {
   d[v] = up[v] = dep;
