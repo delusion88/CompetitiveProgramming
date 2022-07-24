@@ -5,8 +5,6 @@
 
 const int maxn = 1000000, maxlg = 23;
 
-vector<int> g[maxn];
-
 int tin[maxn], tout[maxn], timer, lg;
 int up[maxlg][maxn];
 
